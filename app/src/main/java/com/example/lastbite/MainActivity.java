@@ -1,4 +1,4 @@
-vgit --versionpackage com.example.lastbite;
+package com.example.lastbite;
 
 import android.os.Bundle;
 
