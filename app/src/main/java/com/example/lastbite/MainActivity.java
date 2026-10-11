@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -48,13 +49,49 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this, AddIngredientActivity.class);
             startActivity(intent);
         });
+
+        // A long press opens a confirmation for the selected ingredient.
+        listPantry.setOnItemLongClickListener(
+                (parent, view, position, id) -> {
+                    Cursor item = (Cursor) pantryAdapter.getItem(position);
+                    String name = item.getString(
+                            item.getColumnIndexOrThrow("name"));
+                    confirmDelete(id, name);
+                    return true;
+                });
+    }
+
+    private void confirmDelete(long id, String name) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete ingredient?")
+                .setMessage("Remove " + name + " from your pantry?")
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    try {
+                        int deletedRows =
+                                databaseHelper.deleteIngredient(id);
+
+                        if (deletedRows == 1) {
+                            Toast.makeText(this, "Ingredient deleted",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Ingredient no longer exists",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        loadPantry();
+
+                    } catch (SQLiteException exception) {
+                        Toast.makeText(this, "Could not delete ingredient",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Refresh the list when returning from the ingredient form.
         loadPantry();
     }
 
@@ -62,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             Cursor cursor = databaseHelper.getAllIngredients();
             boolean isEmpty = cursor.getCount() == 0;
-
-            // The adapter closes its previous cursor when it is replaced.
             pantryAdapter.changeCursor(cursor);
 
             txtEmptyPantry.setText(
