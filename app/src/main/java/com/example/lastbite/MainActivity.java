@@ -50,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Pass the selected ingredient ID to the form for editing.
+        listPantry.setOnItemClickListener(
+                (parent, view, position, id) -> {
+                    Intent intent = new Intent(
+                            MainActivity.this, AddIngredientActivity.class);
+                    intent.putExtra("ingredient_id", id);
+                    startActivity(intent);
+                });
+
         // A long press opens a confirmation for the selected ingredient.
         listPantry.setOnItemLongClickListener(
                 (parent, view, position, id) -> {
