@@ -62,6 +62,16 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
 
         ListView listRecipes = findViewById(R.id.listSuggestedRecipes);
         listRecipes.setAdapter(recipeAdapter);
+        ((android.widget.ListView) findViewById(R.id.listSuggestedRecipes))
+                .setOnItemClickListener((parent, view, position, id) -> {
+            android.content.Intent intent = new android.content.Intent(
+                    SuggestedRecipesActivity.this,
+                    RecipeDetailsActivity.class
+            );
+
+            intent.putExtra("recipe_id", recipeIds.get(position));
+            startActivity(intent);
+        });
 
         findViewById(R.id.btnBackToPantry)
                 .setOnClickListener(view -> finish());
