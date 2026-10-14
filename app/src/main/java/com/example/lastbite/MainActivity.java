@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.btnSettings).setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SettingsActivity.class
+            );
+            startActivity(intent);
+        });
+
         // Pass the selected ingredient ID to the form for editing.
         listPantry.setOnItemClickListener(
                 (parent, view, position, id) -> {
@@ -109,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadPantry();
+
+        boolean showTips = getSharedPreferences(
+                "last_bite_settings", MODE_PRIVATE
+        ).getBoolean("show_pantry_tips", true);
+
+        findViewById(R.id.txtPantryTips).setVisibility(
+                showTips ? android.view.View.VISIBLE : android.view.View.GONE
+        );
     }
 
     private void loadPantry() {

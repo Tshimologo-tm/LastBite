@@ -58,6 +58,16 @@
             android:textSize="16sp"
             android:textColor="#59665D" />
 
+        <TextView
+            android:id="@+id/txtPantryTips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="Tip: Tap an ingredient to edit it. Press and hold to delete it. Keep quantities updated for accurate recipe suggestions."
+            android:textColor="#59665D"
+            android:textSize="14sp" />
+
         <ListView
             android:id="@+id/listPantry"
             android:layout_width="match_parent"
