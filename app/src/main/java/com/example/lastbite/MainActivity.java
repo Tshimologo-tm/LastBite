@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Open recipes that match the current pantry.
+        findViewById(R.id.btnRecipes).setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    MainActivity.this, SuggestedRecipesActivity.class);
+            startActivity(intent);
+        });
+
         // Pass the selected ingredient ID to the form for editing.
         listPantry.setOnItemClickListener(
                 (parent, view, position, id) -> {

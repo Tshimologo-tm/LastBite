@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF8EE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cook Now"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#285943" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Every ingredient ready. No shopping needed."
+            android:textSize="16sp"
+            android:textColor="#59665D" />
+
+        <TextView
+            android:id="@+id/txtRecipeCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Checking your pantry..."
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#253A2E" />
+
+        <TextView
+            android:id="@+id/txtNoRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:gravity="center"
+            android:text="No recipes match your pantry yet. Add more ingredients or check your quantities and units."
+            android:textSize="16sp"
+            android:textColor="#59665D"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/listSuggestedRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="12dp"
+            android:divider="#DDDCD2"
+            android:dividerHeight="1dp" />
+
+        <Button
+            android:id="@+id/btnBackToPantry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to My Pantry"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#285943" />
+
+    </LinearLayout>
+</LinearLayout>
